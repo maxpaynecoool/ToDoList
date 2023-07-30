@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import TaskList from "./TaskList";
+import './styles/App.css'
+import TaskForm from "./TaskForm";
+
+interface ITasks {
+    id: number
+    title: string
+    body: string
+}
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [tasks, setTasks] = useState([
+        {id: 1, title: 'Выучить HTML', body: 'Основные тэги и их атрибуты'},
+        {id: 2, title: 'Выучить CSS', body: 'Основные стилевые свойства'},
+        {id: 3, title: 'Выучить JS', body: 'Взаимодействие с DOM-деревом'}
+    ])
+
+    const createTask = (newTask: ITasks) => {
+        setTasks([...tasks, newTask])
+    }
+
+    const removeTask = (task: any) => {
+        setTasks(tasks.filter(t => t.id !== task.id))
+    }
+
+    return (
+        <div className="App">
+            <TaskForm create={createTask}/>
+            {tasks.length !== 0
+                ? <TaskList remove={removeTask} tasks={tasks} title="Мои задачи"/>
+                : <h1 style={{textAlign: 'center'}}> Список пуст </h1>
+            }
+        </div>
+    );
 }
 
 export default App;
