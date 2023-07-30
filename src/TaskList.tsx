@@ -8,15 +8,13 @@ interface ITasks {
 }
 
 
-
-// @ts-ignore
-const TaskList = ({tasks, title, remove}) => {
+const TaskList = ({tasks, title, remove}: { tasks: ITasks[], title: string, remove: (task: ITasks) => void}) => {
     return (
         <div>
             <h1 style={{textAlign: 'center'}}>
                 {title}
             </h1>
-            {tasks.map((task: ITasks, index: number) => {
+            {tasks.map((task, index) => {
                 return (
                     <TaskItem remove={remove} number={index + 1} task={task} key={task.id}/>
                 )

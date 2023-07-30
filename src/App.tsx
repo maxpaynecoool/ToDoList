@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import TaskList from "./TaskList";
 import './styles/App.css'
 import TaskForm from "./TaskForm";
@@ -20,9 +20,17 @@ function App() {
         setTasks([...tasks, newTask])
     }
 
-    const removeTask = (task: any) => {
+    const removeTask = (task: ITasks) => {
         setTasks(tasks.filter(t => t.id !== task.id))
     }
+
+    useEffect(() => {
+        setTasks(JSON.parse(localStorage.getItem('tasks') as string))
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('tasks', JSON.stringify(tasks))
+    })
 
     return (
         <div className="App">

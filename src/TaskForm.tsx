@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-// @ts-ignore
+// @ts-ignore - хз как типизировать функцию create
 const TaskForm = ({create}) => {
     const [task, setTask] = useState({title: '', body: ''})
 
@@ -10,28 +10,27 @@ const TaskForm = ({create}) => {
             ...task, id: Date.now()
         }
         create(newTask)
-        console.log(newTask)
         setTask({title: '', body: ''})
     }
 
     return (
         <form>
             <input
-                value={ task.title }
-                onChange={ (e) => setTask({...task, title: e.target.value}) }
+                value={task.title}
+                onChange={(e) => setTask({...task, title: e.target.value})}
                 type="text"
                 placeholder="Название задачи"
                 className="myInput"
             />
             <input
-                value={ task.body }
-                onChange={ (e) => setTask({...task, body: e.target.value}) }
+                value={task.body}
+                onChange={(e) => setTask({...task, body: e.target.value})}
                 type="text"
                 placeholder="Описание задачи"
                 className="myInput"
             />
             <button
-                onClick={ addNewTask }
+                onClick={addNewTask}
                 className="myButton"
             >
                 Добавить

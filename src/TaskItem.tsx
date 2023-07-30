@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 interface ITasks {
     id: number
@@ -27,7 +27,7 @@ const TaskItem = (props: ITaskItem) => {
     const changeTaskStyle = () => {
         setTaskStyle({
             ...taskStyle,
-            border: '3px solid rgba(75,245,7,0.98)',
+            border: '3px solid rgba(75, 245, 7, 0.98)',
             color: 'rgba(75,245,7,0.98)'
         })
     }
